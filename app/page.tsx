@@ -100,13 +100,13 @@ export default function Home() {
             <p><span>We will never</span> change payout details without your approval.</p>
             <p><span>We will never</span> hide the work completed on your account.</p>
           </div>
-          <p className="fine-print">Important: participation depends on each platform’s rules. We only work with accounts and tasks that permit managed assistance, and we do not guarantee task availability or earnings.</p>
+          <p className="fine-print">Important: participation depends on each platform’s rules. We do not guarantee task availability or earnings.</p>
         </div>
       </div>
     </section>
 
     <section className="proof shell">
-      <blockquote>Tens of vetted taskers. One accountable team.</blockquote>
+      <blockquote>Dozens of vetted taskers. One accountable team.</blockquote>
       <div><h2>Experience across major industries.</h2><p>Our vetted taskers bring experience from a broad range of industries, giving us the depth to match each assignment with people who understand the subject matter. We coordinate the work, review quality, and keep you updated from one place.</p></div>
     </section>
 
@@ -122,6 +122,6 @@ export default function Home() {
       </form>
     </section>
 
-    <footer className="footer"><div className="shell footer-inner"><div><a className="wordmark light" href="#top"><img src="/ai-taskers-mark.png" alt="" width="40" height="40" />AI Taskers</a><p>Accounts managed with clear terms and human hands.</p></div><a href="mailto:hello@ai-taskers.nopt.in">hello@ai-taskers.nopt.in <Arrow /></a><small>© {new Date().getFullYear()} AI Taskers · ai-taskers.nopt.in</small></div></footer>
+    <footer className="footer"><div className="shell footer-inner"><div><a className="wordmark light" href="#top"><img src="/ai-taskers-mark.png" alt="" width="40" height="40" />AI Taskers</a><p>Accounts managed with clear terms and human hands.</p></div><small>© {new Date().getFullYear()} ai-taskers.nopt.in</small></div></footer>
   </main>;
 }
