@@ -26,14 +26,15 @@ export default function Home() {
 
   async function sendLead(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const formElement = event.currentTarget;
     setStatus("sending");
-    const form = new FormData(event.currentTarget);
+    const form = new FormData(formElement);
     const payload = Object.fromEntries(form.entries());
     try {
       const response = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
       if (!response.ok) throw new Error("Request failed");
       setStatus("success");
-      event.currentTarget.reset();
+      formElement.reset();
     } catch {
       setStatus("error");
     }
