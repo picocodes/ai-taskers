@@ -46,3 +46,4 @@ Coolify should build from the included `Dockerfile`, expose container port 3000,
 - 2026-08-29: Social proof is intentionally process-based until verified case studies or testimonials are supplied.
 - 2026-08-29: Production build and responsive QA passed at 320, 375, 414, 768, and 1280×800; dependency audit reported zero known vulnerabilities.
 - 2026-08-29: User supplied the approved social-proof claim that AI Taskers has tens of vetted taskers with experience across major industries.
+- 2026-08-29: Coolify production uses `HOSTNAME=0.0.0.0` in the runtime image so the standalone Next.js server is reachable by container health checks and the reverse proxy.
