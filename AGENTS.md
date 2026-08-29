@@ -23,6 +23,7 @@ This is the living operating guide for AI Taskers. Future agents must update thi
 - `app/globals.css` — page styling; imports root `tokens.css`.
 - `app/api/contact/route.ts` — server-only SMTP lead handler with a honeypot check.
 - `tokens.css` — portable design tokens. Keep raw colors and font stacks here.
+- `public/ai-taskers-mark.png` and `app/icon.png` — generated brand mark and favicon source.
 - `.hallmark/` — design preflight and build history.
 
 ## Environment
@@ -48,3 +49,4 @@ Coolify builds from the included `Dockerfile`, exposes container port 3000, and 
 - 2026-08-29: User supplied the approved social-proof claim that AI Taskers has tens of vetted taskers with experience across major industries.
 - 2026-08-29: Coolify production uses `HOSTNAME=0.0.0.0` in the runtime image so the standalone Next.js server is reachable by container health checks and the reverse proxy.
 - 2026-08-29: Deployed commit `6736fb3` to Coolify at `https://ai-taskers.nopt.in`; public HTTPS returned HTTP 200. Coolify's internal `localhost` health probe is disabled because its Alpine probe resolved incompatibly even while Next.js was ready on `0.0.0.0:3000`; use the public HTTPS response and application logs for runtime verification.
+- 2026-08-29: Added generated AI Taskers ticket-transfer mark, favicon, and a sourced platform directory. Platform pay must remain labeled as advertised figures rather than guaranteed averages unless the platform explicitly publishes an average; review source links when updating.

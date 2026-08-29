@@ -4,6 +4,15 @@ import { FormEvent, useState } from "react";
 
 const Arrow = () => <span aria-hidden="true">↗</span>;
 
+const platforms = [
+  { name: "Mercor", rate: "$50–$150+/hr", note: "Common expert listings", href: "https://work.mercor.com/login", source: "https://www.mercor.com/experts/business-operations/", fit: "Professional and domain experts" },
+  { name: "Handshake AI", rate: "$30–$125/hr", note: "Published fellowship range", href: "https://app.joinhandshake.com/login", source: "https://support.joinhandshake.com/hc/en-us/articles/32264709473303-Handshake-AI-Fellowship-Overview-FAQs-for-EDU-Partners", fit: "Students, graduates and researchers" },
+  { name: "micro1", rate: "$20–$50/hr", note: "Current trade-task listings", href: "https://jobs.micro1.ai/", source: "https://www.micro1.ai/get-paid-to-record-tasks", fit: "Skilled trades and specialist roles" },
+  { name: "Alignerr", rate: "$80/hr", note: "Published average pay", href: "https://app.alignerr.com/", source: "https://www.alignerr.com/", fit: "Generalists and subject experts" },
+  { name: "Outlier", rate: "Up to $150/hr", note: "Top specialist listings", href: "https://app.outlier.ai/en/expert/signup", source: "https://outlier.ai/experts/electrical-engineering", fit: "Writers, coders and domain experts" },
+  { name: "DataAnnotation", rate: "$20–$100+/hr", note: "By role and specialty", href: "https://app.dataannotation.tech/worker_signup", source: "https://www.dataannotation.tech/", fit: "Generalists, coders and specialists" },
+];
+
 export default function Home() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
@@ -24,7 +33,7 @@ export default function Home() {
 
   return <main>
     <header className="nav shell">
-      <a className="wordmark" href="#top" aria-label="AI Taskers home"><span>AI</span> Taskers</a>
+      <a className="wordmark" href="#top" aria-label="AI Taskers home"><img src="/ai-taskers-mark.png" alt="" width="40" height="40" />AI Taskers</a>
       <p className="nav-note">Managed AI training accounts</p>
       <a className="nav-cta" href="#apply">Check your fit <Arrow /></a>
     </header>
@@ -44,6 +53,22 @@ export default function Home() {
         <div className="ledger-split"><span>Eligible earnings</span><strong><b>50</b><i>/</i><b>50</b></strong></div>
         <p>No upfront management fee. Scope and payout terms are confirmed before we begin.</p>
       </aside>
+    </section>
+
+    <section className="platforms" id="platforms">
+      <div className="shell platforms-head">
+        <div><p className="kicker">Choose where to begin</p><h2>Open the account. Then hand us the workload.</h2></div>
+        <p>These platforms recruit people to evaluate, improve, and train AI systems. Open an account in your own name, complete the platform’s checks, and talk to us once you are approved.</p>
+      </div>
+      <div className="shell platform-grid">
+        {platforms.map((platform, index) => <article className="platform-card" key={platform.name}>
+          <div className="platform-index">{String(index + 1).padStart(2, "0")}</div>
+          <div className="platform-main"><h3>{platform.name}</h3><p>{platform.fit}</p></div>
+          <div className="platform-rate"><span>{platform.note}</span><strong>{platform.rate}</strong></div>
+          <div className="platform-actions"><a className="platform-apply" href={platform.href} target="_blank" rel="noreferrer">Open an account <Arrow /></a><a className="rate-source" href={platform.source} target="_blank" rel="noreferrer">Rate source</a></div>
+        </article>)}
+      </div>
+      <p className="shell rate-disclaimer">Rates shown are current advertised figures, not guaranteed earnings or platform-wide averages unless stated. Actual rates, eligibility, location access, and task availability vary by role and can change. Always confirm the offer shown in your own account.</p>
     </section>
 
     <section className="proof-strip" aria-label="Trust commitments">
@@ -97,6 +122,6 @@ export default function Home() {
       </form>
     </section>
 
-    <footer className="footer"><div className="shell footer-inner"><div><a className="wordmark light" href="#top"><span>AI</span> Taskers</a><p>Accounts managed with clear terms and human hands.</p></div><a href="mailto:hello@ai-taskers.nopt.in">hello@ai-taskers.nopt.in <Arrow /></a><small>© {new Date().getFullYear()} AI Taskers · ai-taskers.nopt.in</small></div></footer>
+    <footer className="footer"><div className="shell footer-inner"><div><a className="wordmark light" href="#top"><img src="/ai-taskers-mark.png" alt="" width="40" height="40" />AI Taskers</a><p>Accounts managed with clear terms and human hands.</p></div><a href="mailto:hello@ai-taskers.nopt.in">hello@ai-taskers.nopt.in <Arrow /></a><small>© {new Date().getFullYear()} AI Taskers · ai-taskers.nopt.in</small></div></footer>
   </main>;
 }
