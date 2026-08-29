@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 const Arrow = () => <span aria-hidden="true">↗</span>;
 
@@ -15,6 +15,14 @@ const platforms = [
 
 export default function Home() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [formStartedAt, setFormStartedAt] = useState(0);
+  const [canSubmit, setCanSubmit] = useState(false);
+
+  useEffect(() => {
+    setFormStartedAt(Date.now());
+    const timer = window.setTimeout(() => setCanSubmit(true), 3000);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   async function sendLead(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -117,7 +125,8 @@ export default function Home() {
         <label>Which platform or account do you have?<input name="platform" required placeholder="e.g. an AI evaluation platform" /></label>
         <label>Anything we should know?<textarea name="message" rows={4} placeholder="Account status, task type, or questions" /></label>
         <input className="honeypot" name="company_website" tabIndex={-1} autoComplete="off" aria-hidden="true" />
-        <button className="primary" disabled={status === "sending"} type="submit">{status === "sending" ? "Sending…" : "Request a fit check"} <Arrow /></button>
+        <input type="hidden" name="form_started_at" value={formStartedAt} />
+        <button className="primary" disabled={!canSubmit || status === "sending"} type="submit">{!canSubmit ? "Ready in a moment…" : status === "sending" ? "Sending…" : "Request a fit check"} <Arrow /></button>
         <div className="form-status" aria-live="polite">{status === "success" && <p className="success">Received. We’ll reply by email.</p>}{status === "error" && <p className="error">Couldn’t send. Please try again shortly.</p>}</div>
       </form>
     </section>

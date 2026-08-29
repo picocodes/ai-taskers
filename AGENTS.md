@@ -39,7 +39,8 @@ Coolify builds from the included `Dockerfile`, exposes container port 3000, and 
 1. Preserve responsive behavior at 320, 375, 414, and 768px.
 2. Run `npm run build` after code changes.
 3. Keep form errors generic on the client and secrets server-side.
-4. Update this file when the project changes; add dated notes below for decisions that future agents need.
+4. Preserve the form's honeypot, three-second client/server timing check, and mandatory SMTP TLS configuration.
+5. Update this file when the project changes; add dated notes below for decisions that future agents need.
 
 ## Decision log
 
@@ -50,3 +51,4 @@ Coolify builds from the included `Dockerfile`, exposes container port 3000, and 
 - 2026-08-29: Coolify production uses `HOSTNAME=0.0.0.0` in the runtime image so the standalone Next.js server is reachable by container health checks and the reverse proxy.
 - 2026-08-29: Deployed commit `6736fb3` to Coolify at `https://ai-taskers.nopt.in`; public HTTPS returned HTTP 200. Coolify's internal `localhost` health probe is disabled because its Alpine probe resolved incompatibly even while Next.js was ready on `0.0.0.0:3000`; use the public HTTPS response and application logs for runtime verification.
 - 2026-08-29: Added generated AI Taskers ticket-transfer mark, favicon, and a sourced platform directory. Platform pay must remain labeled as advertised figures rather than guaranteed averages unless the platform explicitly publishes an average; review source links when updating.
+- 2026-08-29: Added a three-second form timing check on both client and server alongside the honeypot. SMTP now uses implicit TLS on port 465 or requires STARTTLS on other ports, enforces TLS 1.2+, and disables Nodemailer file/URL access.
