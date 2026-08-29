@@ -81,12 +81,12 @@ export default function Home() {
     </section>
 
     <section className="proof shell">
-      <blockquote>“Show the work” is our social proof policy.</blockquote>
-      <div><h2>Proof will be verified, not fabricated.</h2><p>As completed partnerships generate permissioned results, this space will carry named case studies and real operating records. Until then, we earn trust with written terms, transparent tracking, and a small first engagement—not made-up logos or mystery testimonials.</p></div>
+      <blockquote>Tens of vetted taskers. One accountable team.</blockquote>
+      <div><h2>Experience across major industries.</h2><p>Our vetted taskers bring experience from a broad range of industries, giving us the depth to match each assignment with people who understand the subject matter. We coordinate the work, review quality, and keep you updated from one place.</p></div>
     </section>
 
     <section className="apply shell" id="apply">
-      <div className="apply-copy"><p className="kicker">Start with a fit check</p><h2>Tell us what you’ve opened. We’ll tell you what we can handle.</h2><p>No passwords in this form. Just enough information to assess the platform and arrange a private conversation.</p></div>
+      <div className="apply-copy"><p className="kicker">Put our team to work</p><h2>Tell us what you’ve opened. We’ll tell you what we can handle.</h2><p>No passwords in this form. Just enough information to assess the platform and arrange a private conversation.</p></div>
       <form onSubmit={sendLead} className="lead-form">
         <div className="field-pair"><label>First name<input name="name" required autoComplete="given-name" /></label><label>Email<input name="email" type="email" required autoComplete="email" /></label></div>
         <label>Which platform or account do you have?<input name="platform" required placeholder="e.g. an AI evaluation platform" /></label>
