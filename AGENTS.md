@@ -31,7 +31,7 @@ Copy `.env.example` locally or configure the same values in Coolify: `SMTP_HOST`
 
 ## Deployment
 
-Coolify should build from the included `Dockerfile`, expose container port 3000, and attach domain `ai-taskers.nopt.in` with HTTPS enabled. Set all SMTP variables before testing the form.
+Coolify builds from the included `Dockerfile`, exposes container port 3000, and serves `ai-taskers.nopt.in` with HTTPS enabled. The production project UUID is `3umhtfrbsek56lzedmeitxyz` and application UUID is `udgffxp5o7zjlwkhz7kmaali`. Set all SMTP variables before testing the form.
 
 ## Working rules
 
@@ -47,3 +47,4 @@ Coolify should build from the included `Dockerfile`, expose container port 3000,
 - 2026-08-29: Production build and responsive QA passed at 320, 375, 414, 768, and 1280×800; dependency audit reported zero known vulnerabilities.
 - 2026-08-29: User supplied the approved social-proof claim that AI Taskers has tens of vetted taskers with experience across major industries.
 - 2026-08-29: Coolify production uses `HOSTNAME=0.0.0.0` in the runtime image so the standalone Next.js server is reachable by container health checks and the reverse proxy.
+- 2026-08-29: Deployed commit `6736fb3` to Coolify at `https://ai-taskers.nopt.in`; public HTTPS returned HTTP 200. Coolify's internal `localhost` health probe is disabled because its Alpine probe resolved incompatibly even while Next.js was ready on `0.0.0.0:3000`; use the public HTTPS response and application logs for runtime verification.
