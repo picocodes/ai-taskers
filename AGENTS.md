@@ -40,7 +40,8 @@ Coolify builds from the included `Dockerfile`, exposes container port 3000, and 
 2. Run `npm run build` after code changes.
 3. Keep form errors generic on the client and secrets server-side.
 4. Preserve the form's honeypot, three-second client/server timing check, and mandatory SMTP TLS configuration.
-5. Update this file when the project changes; add dated notes below for decisions that future agents need.
+5. Keep SMTP diagnostics privacy-safe: log submission/message IDs, counts, response codes, and sanitized relay responses only—never addresses, message bodies, usernames, or credentials.
+6. Update this file when the project changes; add dated notes below for decisions that future agents need.
 
 ## Decision log
 
@@ -53,3 +54,4 @@ Coolify builds from the included `Dockerfile`, exposes container port 3000, and 
 - 2026-08-29: Added generated AI Taskers ticket-transfer mark, favicon, and a sourced platform directory. Platform pay must remain labeled as advertised figures rather than guaranteed averages unless the platform explicitly publishes an average; review source links when updating.
 - 2026-08-29: Added a three-second form timing check on both client and server alongside the honeypot. SMTP now uses implicit TLS on port 465 or requires STARTTLS on other ports, enforces TLS 1.2+, and disables Nodemailer file/URL access.
 - 2026-08-29: Form submission must capture the form element before the first `await`; using React's `event.currentTarget` afterward can be null and falsely show an error even when SMTP returns success.
+- 2026-08-31: Added structured SMTP delivery diagnostics. Successful and failed API responses carry a submission ID that can be correlated with Coolify logs; logged fields exclude addresses, content, and credentials.

@@ -1,7 +1,12 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
+function safeLogValue(value: unknown, maxLength = 300) {
+  return String(value ?? "").replace(/[\r\n\t]+/g, " ").slice(0, maxLength);
+}
+
 export async function POST(request: Request) {
+  const submissionId = crypto.randomUUID();
   try {
     const body = await request.json();
     if (body.company_website) return NextResponse.json({ ok: true });
@@ -26,7 +31,25 @@ export async function POST(request: Request) {
       disableFileAccess: true,
       disableUrlAccess: true,
     });
-    await transporter.sendMail({ from: SMTP_FROM, to: CONTACT_TO, replyTo: email, subject: `AI Taskers fit check: ${platform}`, text: `Name: ${name}\nEmail: ${email}\nPlatform: ${platform}\n\n${message || "No additional message."}` });
-    return NextResponse.json({ ok: true });
-  } catch { return NextResponse.json({ error: "Unable to send" }, { status: 500 }); }
+    const result = await transporter.sendMail({ from: SMTP_FROM, to: CONTACT_TO, replyTo: email, subject: `AI Taskers fit check: ${platform}`, text: `Name: ${name}\nEmail: ${email}\nPlatform: ${platform}\n\n${message || "No additional message."}` });
+    console.info("contact_email_result", {
+      submissionId,
+      messageId: safeLogValue(result.messageId, 160),
+      acceptedCount: result.accepted.length,
+      rejectedCount: result.rejected.length,
+      pendingCount: result.pending?.length ?? 0,
+      response: safeLogValue(result.response),
+    });
+    return NextResponse.json({ ok: true, submissionId });
+  } catch (error) {
+    const smtpError = error as { code?: unknown; command?: unknown; responseCode?: unknown; response?: unknown };
+    console.error("contact_email_error", {
+      submissionId,
+      code: safeLogValue(smtpError.code, 80),
+      command: safeLogValue(smtpError.command, 80),
+      responseCode: safeLogValue(smtpError.responseCode, 20),
+      response: safeLogValue(smtpError.response),
+    });
+    return NextResponse.json({ error: "Unable to send", submissionId }, { status: 500 });
+  }
 }
